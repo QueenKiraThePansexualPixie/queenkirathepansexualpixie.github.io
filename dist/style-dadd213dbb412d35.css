@@ -1,0 +1,60 @@
+@import url("https://fonts.googleapis.com/css?family=Convergence");
+@import url("https://fonts.googleapis.com/css?family=Open+Sans");
+
+body {
+    font-family: Convergence, "Open Sans", "Segoe UI", sans-serif;
+    margin: 0;
+    /* overflow: hidden; */
+}
+
+#header {
+    color: #e0ffe1;
+    background-color: #39363c;
+    padding: 8px 16px;
+    margin: 0;
+}
+
+#header h1{
+    margin: 2em 1em;
+}
+
+#nav {
+    background-color: #232323;
+    font-family: "Times New Roman", Times, Garamond, "Cormorant Garamond",
+        "Garamond EB", serif !important;
+    list-style-type: none;
+    width: 200px;
+    height: 100%;
+    position: fixed;
+    padding: 15px 5px;
+    margin: 0;
+    overflow: auto;
+}
+
+#nav li {
+    font-size: 16pt;
+    padding: 0;
+    margin: 0;
+}
+
+#nav li a {
+    color: #aaaaaa;
+    background-color: #232323;
+    text-decoration: none;
+    text-align: left;
+    display: block;
+    width: 170px;
+    padding: 5px 10px;
+    margin: 0;
+}
+
+#nav li a:hover,
+#nav li a.active {
+    color: #efefef;
+}
+
+#main {
+    margin-left: 205px;
+    padding: 25px 50px;
+    /* overflow: auto; */
+}
