@@ -14,6 +14,7 @@ mod typing {
         day: u8,
     }
 
+    #[allow(dead_code)]
     impl KiraDate {
         pub(crate) fn new(year: u16, month: u8, day: u8) -> KiraDate {
             KiraDate { year, month, day }
