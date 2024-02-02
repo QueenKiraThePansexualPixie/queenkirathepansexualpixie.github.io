@@ -113,8 +113,8 @@ mod content {
     impl Skill {
         pub(crate) fn get_html(&self) -> Html {
             html! {
-                <div class={"card"}>
-                    <h5 class={"card-title"}>{self.name.clone()}</h5>
+                <div key={self.id} class={"card"}>
+                    <h3 class={"card-title"}>{self.name.clone()}</h3>
                     <p class={"card-detail"}>{
                         self.areas.iter().map(|area| html!{
                             <span>{area.clone().to_owned() + ". "}</span>
@@ -145,11 +145,23 @@ mod content {
         pub(crate) fn find_first_with_name(&self, name: &str) -> Option<&Skill> {
             self.skills.iter().find(|skill| skill.name == name)
         }
+
+        pub(crate) fn get_html(&self) -> Html {
+            html! {
+                <div class={"content-list"}>
+                    {
+                        self.skills.iter().map(
+                            |skill| skill.get_html()
+                        ).collect::<Html>()
+                    }
+                </div>
+            }
+        }
     }
 
     #[derive(Properties, PartialEq)]
     pub(crate) struct SkillListProperties {
-        pub(crate) skills: Vec<Skill>,
+        pub(crate) skills: SkillList,
     }
 
     #[derive(Clone, PartialEq)]
@@ -166,8 +178,8 @@ mod content {
     impl Achievement {
         pub(crate) fn get_html(&self) -> Html {
             html! {
-                <div class={"card"}>
-                    <h5 class={"card-title"}>{self.name.clone()}</h5>
+                <div key={self.id} class={"card"}>
+                    <h3 class={"card-title"}>{self.name.clone()}</h3>
                     <p class={"card-detail"}>{
                         self.areas.iter().map(|area| html!{
                             <span>{area.clone().to_owned() + ". "}</span>
@@ -182,7 +194,7 @@ mod content {
                     }</p>
                     <p class={"card-detail"}>{
                         self.skills.iter().map(|skill| html!{
-                            <span>{skill.get_html()}</span>
+                            <span>{skill.name.clone().to_owned() + ". "}</span>
                         }).collect::<Html>()
                     }</p>
                 </div>
@@ -210,11 +222,23 @@ mod content {
                 .iter()
                 .find(|achievement| achievement.name == name)
         }
+
+        pub(crate) fn get_html(&self) -> Html {
+            html! {
+                <div class={"content-list"}>
+                    {
+                        self.achievements.iter().map(
+                            |achievement| achievement.get_html()
+                        ).collect::<Html>()
+                    }
+                </div>
+            }
+        }
     }
 
     #[derive(Properties, PartialEq)]
     pub(crate) struct AchievementListProperties {
-        pub(crate) achievements: Vec<Achievement>,
+        pub(crate) achievements: AchievementList,
     }
 
     #[derive(Clone, PartialEq)]
@@ -231,8 +255,8 @@ mod content {
     impl Creation {
         pub(crate) fn get_html(&self) -> Html {
             html! {
-                <div class={"card"}>
-                    <h5 class={"card-title"}>{self.name.clone()}</h5>
+                <div key={self.id} class={"card"}>
+                    <h3 class={"card-title"}>{self.name.clone()}</h3>
                     <p class={"card-detail"}>{
                         self.areas.iter().map(|area| html!{
                             <span>{area.clone().to_owned() + ". "}</span>
@@ -247,7 +271,7 @@ mod content {
                     }</p>
                     <p class={"card-detail"}>{
                         self.skills.iter().map(|skill| html!{
-                            <span>{skill.get_html()}</span>
+                            <span>{skill.name.clone().to_owned() + ". "}</span>
                         }).collect::<Html>()
                     }</p>
                 </div>
@@ -273,11 +297,23 @@ mod content {
         pub(crate) fn find_first_with_name(&self, name: &str) -> Option<&Creation> {
             self.creations.iter().find(|creation| creation.name == name)
         }
+
+        pub(crate) fn get_html(&self) -> Html {
+            html! {
+                <div class={"content-list"}>
+                    {
+                        self.creations.iter().map(
+                            |creation| creation.get_html()
+                        ).collect::<Html>()
+                    }
+                </div>
+            }
+        }
     }
 
     #[derive(Properties, PartialEq)]
     pub(crate) struct CreationListProperties {
-        pub(crate) creations: Vec<Creation>,
+        pub(crate) creations: CreationList,
     }
 
     #[derive(Clone, PartialEq)]
@@ -293,8 +329,8 @@ mod content {
     impl Article {
         pub(crate) fn get_html(&self) -> Html {
             html! {
-                <article class={"card"}>
-                    <h5 class={"card-title"}>{self.title.clone()}</h5>
+                <article key={self.id} class={"card"}>
+                    <h3 class={"card-title"}>{self.title.clone()}</h3>
                     <p class={"card-detail"}>{self.published.to_string("")}</p>
                     <p class={"card-detail"}>{
                         self.topics.iter().map(|topic| html!{
@@ -326,11 +362,23 @@ mod content {
         pub(crate) fn find_first_with_title(&self, title: &str) -> Option<&Article> {
             self.articles.iter().find(|article| article.title == title)
         }
+
+        pub(crate) fn get_html(&self) -> Html {
+            html! {
+                <div class={"content-list"}>
+                    {
+                        self.articles.iter().map(
+                            |article| article.get_html()
+                        ).collect::<Html>()
+                    }
+                </div>
+            }
+        }
     }
 
     #[derive(Properties, PartialEq)]
     pub(crate) struct ArticleListProperties {
-        pub(crate) articles: Vec<Article>,
+        pub(crate) articles: ArticleList,
     }
 }
 use content::*;
@@ -374,42 +422,75 @@ mod pages {
                 <p>{
                     "Hi, I'm Kira H, and I somehow exist, unfortunately for you."
                 }</p>
+
+                <hr />
+
+                <p>
+                    {"I was born in the small town of Wincanton in rural England. "}
+                    {"It was a Wednesday, Wednesday the 14th of September, in 2005. "}
+                </p>
             </div>
         }
     }
 
     #[function_component(Skills)]
-    pub(crate) fn skills() -> Html {
+    pub(crate) fn skills(SkillListProperties { skills }: &SkillListProperties) -> Html {
         html! {
             <div>
                 <h1>{"Skills"}</h1>
+
+                <p>{"These are my skills."}</p>
+
+                <hr />
+
+                <div>{skills.get_html()}</div>
             </div>
         }
     }
 
     #[function_component(Achievements)]
-    pub(crate) fn achievements() -> Html {
+    pub(crate) fn achievements(
+        AchievementListProperties { achievements }: &AchievementListProperties,
+    ) -> Html {
         html! {
             <div>
                 <h1>{"Achievements"}</h1>
+
+                <p>{"These are my achievements."}</p>
+
+                <hr />
+
+                <div>{achievements.get_html()}</div>
             </div>
         }
     }
 
     #[function_component(Creations)]
-    pub(crate) fn creations() -> Html {
+    pub(crate) fn creations(CreationListProperties { creations }: &CreationListProperties) -> Html {
         html! {
             <div>
                 <h1>{"Creations"}</h1>
+
+                <p>{"These are my creations."}</p>
+
+                <hr />
+
+                <div>{creations.get_html()}</div>
             </div>
         }
     }
 
     #[function_component(Articles)]
-    pub(crate) fn articles() -> Html {
+    pub(crate) fn articles(ArticleListProperties { articles }: &ArticleListProperties) -> Html {
         html! {
             <div>
                 <h1>{"Articles"}</h1>
+
+                <p>{"These are my articles."}</p>
+
+                <hr />
+
+                <div>{articles.get_html()}</div>
             </div>
         }
     }
@@ -419,6 +500,72 @@ mod pages {
         html! {
             <div>
                 <h1>{"Contact"}</h1>
+
+                <p>{
+                    "If you have any questions, feel free to contact me."
+                }</p>
+
+                <div class={"contact-details-container"}>
+                    <a
+                        class={"contact-icon"}
+                        href={"mailto:kira.hudson.v0@gmail.com"}
+                        title={"kira.hudson.v0@gmail.com"}
+                        id={"Email"}
+                        target={"_blank"}
+                    >
+                        <i class={"fa-solid fa-square-envelope"}></i>
+                    </a>
+
+                    <a
+                        class={"contact-icon"}
+                        href={"https://github.com/QueenKiraThePansexualPixie/"}
+                        id={"GitHub"}
+                        title={"@QueenKiraThePansexualPixie"}
+                        target={"_blank"}
+                    >
+                        <i class={"fa-brands fa-square-github"}></i>
+                    </a>
+
+                    <a
+                        class={"contact-icon"}
+                        href={"https://www.tumblr.com/blog/kira-is-pan/"}
+                        id={"Tumblr"}
+                        title={"@kira-is-pan"}
+                        target={"_blank"}
+                    >
+                        <i class={"fa-brands fa-square-tumblr"}></i>
+                    </a>
+
+                    <a
+                        class={"contact-icon"}
+                        href={"https://www.instagram.com/kirathepanpixie/"}
+                        id={"Instagram"}
+                        title={"@kirathepanpixie"}
+                        target={"_blank"}
+                    >
+                        <i class={"fa-brands fa-square-instagram"}></i>
+                    </a>
+
+                    <a
+                        class={"contact-icon"}
+                        href={"https://www.pinterest.co.uk/kirathepansexualpixie/"}
+                        id={"Pinterest"}
+                        title={"@kirathepansexualpixie"}
+                        target={"_blank"}
+                    >
+                        <i class={"fa-brands fa-square-pinterest"}></i>
+                    </a>
+
+                    <a
+                        class={"contact-icon"}
+                        href={"https://www.reddit.com/user/KiraThePanPixie/"}
+                        id={"Reddit"}
+                        title={"@KiraThePanPixie"}
+                        target={"_blank"}
+                    >
+                        <i class={"fa-brands fa-square-reddit"}></i>
+                    </a>
+                </div>
             </div>
         }
     }
@@ -444,13 +591,39 @@ use pages::*;
 
 #[function_component(App)]
 fn app() -> Html {
-    let skills: SkillList = SkillList::new(vec![Skill {
-        id: 0,
-        name: "Rust".to_string(),
-        areas: vec!["Programming".to_string(), "Web Development".to_string()],
-        competency: "Beginner".to_string(),
-        description: "".to_string(),
-    }]);
+    let skills: SkillList = SkillList::new(vec![
+        Skill {
+            id: 0,
+            name: "Rust".to_string(),
+            areas: vec![
+                "Backend".to_string(),
+                "Frontend".to_string(),
+                "Game Development".to_string(),
+                "Scripting".to_string(),
+                "Systems Programming".to_string(),
+                "Web Development".to_string(),
+            ],
+            competency: "Beginner".to_string(),
+            description: "High-level systems programming language, designed for interacting more safely with low-level concepts.".to_string(),
+        },
+        Skill {
+            id: 1,
+            name: "C++".to_string(),
+            areas: vec![
+                "Backend".to_string(),
+                "Database Development".to_string(),
+                "Digital Graphics".to_string(),
+                "Frontend".to_string(),
+                "Game Development".to_string(),
+                "Scripting".to_string(),
+                "Systems Programming".to_string(),
+                "Web Development".to_string(),
+            ],
+            competency: "Novice".to_string(),
+            description: "Low-level, high-control, systems programming language. Higher level than roughly 2 of the hundreds of programming language that exist in today's landscape.".to_string(),
+        },
+    ]);
+
     let achievements: AchievementList = AchievementList::new(vec![Achievement {
         id: 0,
         name: "<NAME>".to_string(),
@@ -460,6 +633,7 @@ fn app() -> Html {
         skills: vec![],
         description: "".to_string(),
     }]);
+
     let creations: CreationList = CreationList::new(vec![Creation {
         id: 0,
         name: "<NAME>".to_string(),
@@ -469,6 +643,7 @@ fn app() -> Html {
         skills: vec![],
         description: "".to_string(),
     }]);
+
     let articles: ArticleList = ArticleList::new(vec![Article {
         id: 0,
         title: "<NAME>".to_string(),
@@ -486,6 +661,7 @@ fn app() -> Html {
         <div>
             <header  id={"header"}>
                 <h1>{ "Hello, world!" }</h1>
+                <img src={"icon.png"} alt={"Website Icon"} />
             </header>
             <ul id={"nav"}>
                 <li><a href={"/"}>{ "Home" }</a></li>
@@ -501,7 +677,7 @@ fn app() -> Html {
                         render={move |route: Route| {
                             match route {
                                 Route::Home => html! { <Home /> },
-                                Route::Skills => html! { <Skills /> },
+                                Route::Skills => html! { <Skills skills={skills.clone()} /> },
                                 Route::Skill { skill } => html! {
                                     <ContentComponent content={
                                         match skills.find_first_with_name(&skill) {
@@ -510,7 +686,7 @@ fn app() -> Html {
                                         }
                                     } />
                                 },
-                                Route::Achievements => html! { <Achievements /> },
+                                Route::Achievements => html! { <Achievements achievements={achievements.clone()} /> },
                                 Route::Achievement { achievement } => html! {
                                     <ContentComponent content={
                                         match achievements.find_first_with_name(&achievement) {
@@ -519,7 +695,7 @@ fn app() -> Html {
                                         }
                                     } />
                                 },
-                                Route::Creations => html! { <Creations /> },
+                                Route::Creations => html! { <Creations creations={creations.clone()} /> },
                                 Route::Creation { creation } => html! {
                                     <ContentComponent content={
                                         match creations.find_first_with_name(&creation) {
@@ -528,7 +704,7 @@ fn app() -> Html {
                                         }
                                     } />
                                 },
-                                Route::Articles => html! { <Articles /> },
+                                Route::Articles => html! { <Articles articles={articles.clone()} /> },
                                 Route::Article { article } => html! {
                                     <ContentComponent content={
                                         match articles.find_first_with_title(&article) {
