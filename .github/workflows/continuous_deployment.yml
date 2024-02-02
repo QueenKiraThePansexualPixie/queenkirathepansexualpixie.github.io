@@ -1,25 +1,29 @@
-# in .github/workflows/continuous_integration.yml
-name: Continuous integration
-on: [push, pull_request]
+# in .github/workflows/continuous_deployment.yml
+name: Continuous deployment
+on:
+  workflow_run:
+    branches: [main]
+    workflows: [Continuous integration]
+    types: [completed]
 
 jobs:
-  test:
+  release:
     runs-on: ubuntu-latest
-
     steps:
-    - uses: actions/checkout@v2
-    - run: cargo test --all
+      - uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+          target: wasm32-unknown-unknown
 
-  format:
-    runs-on: ubuntu-latest
+      - uses: jetli/trunk-action@v0.1.0
+      - uses: jetli/wasm-bindgen-action@v0.1.0
 
-    steps:
-    - uses: actions/checkout@v2
-    - run: cargo fmt --all -- --check
+      - uses: actions/checkout@v2
 
-  clippy:
-    runs-on: ubuntu-latest
+      - run: trunk build --release
 
-    steps:
-    - uses: actions/checkout@v2
-    - run: cargo clippy --all -- -D warnings
+      - uses: peaceiris/actions-gh-pages@v3
+        if: github.ref == 'refs/heads/main'
+        with:
+          github_token: $
+          publish_dir: ./dist
