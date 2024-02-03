@@ -665,12 +665,24 @@ fn app() -> Html {
                 <img src={"icon.png"} alt={"Website Icon"} />
             </header>
             <ul id={"nav"}>
-                <li><a href={"/"}>{ "Home" }</a></li>
-                <li><a href={"/skills"}>{ "Skills" }</a></li>
-                <li><a href={"/achievements"}>{ "Achievements" }</a></li>
-                <li><a href={"/creations"}>{ "Creations" }</a></li>
-                <li><a href={"/articles"}>{ "Articles" }</a></li>
-                <li><a href={"/contact"}>{ "Contact" }</a></li>
+                <li>
+                    <Link<Route> to={Route::Home}>{ "Home" }</Link<Route>>
+                </li>
+                <li>
+                    <Link<Route> to={Route::Skills}>{ "Skills" }</Link<Route>>
+                </li>
+                <li>
+                    <Link<Route> to={Route::Achievements}>{ "Achievements" }</Link<Route>>
+                </li>
+                <li>
+                    <Link<Route> to={Route::Creations}>{ "Creations" }</Link<Route>>
+                </li>
+                <li>
+                    <Link<Route> to={Route::Articles}>{ "Articles" }</Link<Route>>
+                </li>
+                <li>
+                    <Link<Route> to={Route::Contact}>{ "Contact" }</Link<Route>>
+                </li>
             </ul>
             <main id={"main"}>
                 <BrowserRouter>
