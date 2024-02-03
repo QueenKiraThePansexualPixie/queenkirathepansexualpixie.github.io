@@ -2,7 +2,7 @@
 
 This is my first fully completed, non-satic website. It's a portfolio/personal website.
 
-You can find the GitHub Pages release at [queenkirathepansexualpixie.github.io/personal-website](https://queenkirathepansexualpixie.github.io/personal-website/). (Not currently working)
+You can find the GitHub Pages release at [queenkirathepansexualpixie.github.io](https://queenkirathepansexualpixie.github.io/). (Not currently working)
 
 ---
 
