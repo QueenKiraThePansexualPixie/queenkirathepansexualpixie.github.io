@@ -18,6 +18,9 @@ jobs:
         with:
           toolchain: stable
 
+      - name: Add WebAssembly Target
+        run: rustup target add wasm32-unknown-unknown
+
       - name: Install Trunk
         run: cargo install trunk
 
