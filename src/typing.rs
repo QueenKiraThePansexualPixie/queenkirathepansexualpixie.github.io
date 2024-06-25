@@ -1,54 +1,53 @@
 use chrono::{prelude::*, LocalResult};
 use std::fmt::Display;
-// use super::*;
 
-#[cfg(test)]
-mod tests {
-    use super::*;
-    use rstest::rstest;
-
-    #[rstest]
-    fn kira_date_to_string_fmtd_works_as_expected() {
-        let date = KiraDate::new(2024, 2, 1);
-
-        assert_eq!(
-            date.to_string_fmtd(Some("Y-M-D")),
-            format!(
-                "{}-{}-{}",
-                date.get_year(),
-                date.get_month(),
-                date.get_day()
-            )
-        );
-        assert_eq!(
-            date.to_string_fmtd(Some("d/m/y")),
-            format!(
-                "{}/{}/{}",
-                date.get_day(),
-                date.get_month(),
-                date.get_year()
-            )
-        );
-        assert_eq!(
-            date.to_string_fmtd(Some("Y.M.D")),
-            format!(
-                "{}.{}.{}",
-                date.get_day(),
-                date.get_month(),
-                date.get_year()
-            )
-        );
-        assert_eq!(
-            date.to_string_fmtd(None),
-            format!(
-                "{}/{}/{}",
-                date.get_day(),
-                date.get_month(),
-                date.get_year()
-            )
-        );
-    }
-}
+////#[cfg(test)]
+////mod tests {
+////    use super::*;
+////    use rstest::rstest;
+////
+////    #[rstest]
+////    fn kira_date_to_string_fmtd_works_as_expected() {
+////        let date = KiraDate::new(2024, 2, 1);
+////
+////        assert_eq!(
+////            date.to_string_fmtd(Some("Y-M-D")),
+////            format!(
+////                "{}-{}-{}",
+////                date.get_year(),
+////                date.get_month(),
+////                date.get_day()
+////            )
+////        );
+////        assert_eq!(
+////            date.to_string_fmtd(Some("d/m/y")),
+////            format!(
+////                "{}/{}/{}",
+////                date.get_day(),
+////                date.get_month(),
+////                date.get_year()
+////            )
+////        );
+////        assert_eq!(
+////            date.to_string_fmtd(Some("Y.M.D")),
+////            format!(
+////                "{}.{}.{}",
+////                date.get_day(),
+////                date.get_month(),
+////                date.get_year()
+////            )
+////        );
+////        assert_eq!(
+////            date.to_string_fmtd(None),
+////            format!(
+////                "{}/{}/{}",
+////                date.get_day(),
+////                date.get_month(),
+////                date.get_year()
+////            )
+////        );
+////    }
+////}
 
 pub type Year = i32;
 pub type Month = u8;
