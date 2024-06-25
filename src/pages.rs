@@ -1,7 +1,12 @@
-use super::*;
+use crate::content::{
+    AchievementListProperties, ArticleListProperties, CreationListProperties, SkillListProperties,
+    ToHtml,
+};
+use yew::prelude::*;
+use yew_router::prelude::*;
 
-#[derive(Clone, Routable, PartialEq)]
-pub(crate) enum Route {
+#[derive(Clone, Routable, PartialEq, Eq)]
+pub enum Route {
     #[at("/")]
     Home,
     #[at("/skills")]
@@ -28,7 +33,7 @@ pub(crate) enum Route {
 }
 
 #[function_component(Home)]
-pub(crate) fn home() -> Html {
+pub fn home() -> Html {
     html! {
         <div>
             <h1>{"Home"}</h1>
@@ -48,7 +53,7 @@ pub(crate) fn home() -> Html {
 }
 
 #[function_component(Skills)]
-pub(crate) fn skills(SkillListProperties { skills }: &SkillListProperties) -> Html {
+pub fn skills(SkillListProperties { skills }: &SkillListProperties) -> Html {
     html! {
         <div>
             <h1>{"Skills"}</h1>
@@ -57,13 +62,13 @@ pub(crate) fn skills(SkillListProperties { skills }: &SkillListProperties) -> Ht
 
             <hr />
 
-            <div>{skills.get_html()}</div>
+            <div>{skills.to_html()}</div>
         </div>
     }
 }
 
 #[function_component(Achievements)]
-pub(crate) fn achievements(
+pub fn achievements(
     AchievementListProperties { achievements }: &AchievementListProperties,
 ) -> Html {
     html! {
@@ -74,13 +79,13 @@ pub(crate) fn achievements(
 
             <hr />
 
-            <div>{achievements.get_html()}</div>
+            <div>{achievements.to_html()}</div>
         </div>
     }
 }
 
 #[function_component(Creations)]
-pub(crate) fn creations(CreationListProperties { creations }: &CreationListProperties) -> Html {
+pub fn creations(CreationListProperties { creations }: &CreationListProperties) -> Html {
     html! {
         <div>
             <h1>{"Creations"}</h1>
@@ -89,13 +94,13 @@ pub(crate) fn creations(CreationListProperties { creations }: &CreationListPrope
 
             <hr />
 
-            <div>{creations.get_html()}</div>
+            <div>{creations.to_html()}</div>
         </div>
     }
 }
 
 #[function_component(Articles)]
-pub(crate) fn articles(ArticleListProperties { articles }: &ArticleListProperties) -> Html {
+pub fn articles(ArticleListProperties { articles }: &ArticleListProperties) -> Html {
     html! {
         <div>
             <h1>{"Articles"}</h1>
@@ -104,13 +109,13 @@ pub(crate) fn articles(ArticleListProperties { articles }: &ArticleListPropertie
 
             <hr />
 
-            <div>{articles.get_html()}</div>
+            <div>{articles.to_html()}</div>
         </div>
     }
 }
 
 #[function_component(Contact)]
-pub(crate) fn contact() -> Html {
+pub fn contact() -> Html {
     html! {
         <div>
             <h1>{"Contact"}</h1>
@@ -185,7 +190,7 @@ pub(crate) fn contact() -> Html {
 }
 
 #[function_component(NotFound)]
-pub(crate) fn not_found() -> Html {
+pub fn not_found() -> Html {
     html! {
         <div>
             <h1>{"Error 404"}</h1>

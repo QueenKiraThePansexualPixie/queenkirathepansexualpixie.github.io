@@ -33,14 +33,19 @@ jobs:
         run: rustup target add wasm32-unknown-unknown
 
       - name: Install Trunk
-        run: cargo install trunk
+        run: cargo install --locked trunk
 
       - name: Build WebAssembly
         run: trunk build --release
 
+      - name: Upload GitHub Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./dist
+
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v1
+        uses: actions/deploy-pages@v3
         # with:
-        #   github_token: ${{ secrets.GITHUB_TOKEN }}
+        #   github_token: $ {{ secrets.GITHUB_TOKEN }}
         #   publish_dir: ./dist
